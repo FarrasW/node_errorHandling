@@ -32,6 +32,18 @@ app.get('/cubenumber/:num', async (req, res,next) => {
     }
 });
 
+// GET endpoint
+app.get('/getelementatindex/:mystr/:idx', async (req, res, next) => {
+    let mystr = req.params.mystr;
+    let idx = req.params.idx;
+    if (idx<=mystr.length) {
+        let chatrAtIdx = mystr.charAt(idx-1);
+        res.json({"Element at index":chatrAtIdx})
+    } else {
+        next( new Error("Index greater than string length"))
+    }
+});
+
 //Error handling middleware
 app.use((err, req, res, next) => {
     // Set default values for status code and status if not provided in the error object
